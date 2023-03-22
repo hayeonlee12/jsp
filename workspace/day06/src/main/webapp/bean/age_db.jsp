@@ -17,7 +17,7 @@
 		// dbConnection
 		String name = request.getParameter("name");
 		MemberDao mdao = new MemberDao();
-		int age = mdao.getAge();
+		int age = mdao.getAge(name);
 		
 	%>
 	
