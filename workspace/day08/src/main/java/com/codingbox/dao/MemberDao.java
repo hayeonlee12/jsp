@@ -10,7 +10,10 @@ import javax.sql.DataSource;
 
 import com.codingbox.vo.MemberBean;
 
+import oracle.net.aso.p;
+
 public class MemberDao {
+
 	Context context;
 	DataSource dataSource;
 	Connection conn;
@@ -22,10 +25,12 @@ public class MemberDao {
 		int result = 0;
 		
 		try {
-//			conn = dataSource.getConnection();
 			context = new InitialContext(null);
-			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/oracle");
+			dataSource 
+			= (DataSource)context.lookup("java:comp/env/jdbc/oracle");
 			conn = dataSource.getConnection();
+			
+//			conn = DBConnection.getConntion();
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, member.getUserid());
 			pstm.setString(2, member.getUserpw());
@@ -34,28 +39,29 @@ public class MemberDao {
 			
 			result = pstm.executeUpdate();
 			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-		if(result != 0) {
+		if( result != 0 ) {
 			return true;
 		} else {
 			return false;
 		}
-		
 	}
 	
 	public MemberBean login(String userid, String userpw) {
-		String sql = "SELECT * FROM TBL_MEMBER tm WHERE USERID = ? AND USERPW = ?";
-		
+		String sql = "SELECT * FROM TBL_MEMBER tm "
+				+ "WHERE USERID = ? "
+				+ "AND USERPW = ? ";
 		MemberBean member = null;
 		
 		try {
-			conn = ((DataSource)new InitialContext(null)
-					.lookup("java:comp/env/jdbc/oracle"))
-					.getConnection();
+			
+			conn =  ((DataSource)new InitialContext(null)
+						.lookup("java:comp/env/jdbc/oracle"))
+						.getConnection();
+//			conn = DBConnection.getConntion();
 			pstm = conn.prepareStatement(sql);
 			
 			pstm.setString(1, userid);
@@ -63,14 +69,15 @@ public class MemberDao {
 			
 			rs = pstm.executeQuery();
 			
-			if(rs.next()) {
+			if( rs.next() ) {
 				member = new MemberBean();
 				member.setUserid(rs.getString(1));
 				member.setUserpw(rs.getString(2));
 				member.setUsername(rs.getString(3));
 				member.setUserphone(rs.getString(4));
 			}
-		} catch(Exception e) {
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -78,12 +85,15 @@ public class MemberDao {
 	}
 	
 //	public boolean login(String userid, String userpw) {
-//		String sql = "SELECT * FROM TBL_MEMBER tm WHERE USERID = ? AND USERPW = ?";
-//		
+//		System.out.println(userid);
+//		System.out.println(userpw);
+//		String sql = "SELECT * FROM TBL_MEMBER tm "
+//				+ "WHERE USERID = ? "
+//				+ "AND USERPW = ? ";
 //		boolean result = false;
 //		
 //		try {
-//			conn = DBConnection.getConnection();
+//			conn = DBConnection.getConntion();
 //			pstm = conn.prepareStatement(sql);
 //			
 //			pstm.setString(1, userid);
@@ -91,41 +101,59 @@ public class MemberDao {
 //			
 //			rs = pstm.executeQuery();
 //			
-//			if(rs.next()) {
+//			if( rs.next() ) {
 //				result = true;
 //			}
-//		} catch(Exception e) {
+//			
+//		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
+//		
 //		return result;
 //	}
 	
+	/**
+	 * 아이디가 있는경우 true 	-> 회원가입 불가능
+	 * 아이디가 없는경우 false 	-> 회원가입 가능
+	 */
 	public boolean checkId(String userid) {
-		/**
-		 * 아이디가 있는 경우를 true - > 회원가입 불가능
-		 * 아이디가 없는 경우 false -> 회원가입 가능
-		 */
-		boolean result = false; // 아이디가 있는 경우
-		String sql = "SELECT COUNT(*)"
-				+ "FROM TBL_MEMBER tm "
-				+ "WHERE USERID = ?";
-		
+		boolean result = false;	
+		String sql = "SELECT count(*) FROM TBL_MEMBER tm "
+						+ "WHERE 	USERID = ?";
 		try {
-			conn = ((DataSource)new InitialContext(null)
+			conn =  ((DataSource)new InitialContext(null)
 					.lookup("java:comp/env/jdbc/oracle"))
 					.getConnection();
+			
+//			conn = DBConnection.getConntion();
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, userid);
 			rs = pstm.executeQuery();
 			
 			if(rs.next()) {
-				if(rs.getInt(1) == 1) {
+				if( rs.getInt(1) == 1 ) {
 					result = true;
 				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+

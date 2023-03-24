@@ -42,24 +42,27 @@
 				<input type = "text" name = "userphone"/>
 			</label>
 		</p>
-<!-- 		<p> -->
-<!-- 			<label> 우편번호 -->
-<!-- 				<input type = "text" name = "userpost"/> -->
-<!-- 			</label> -->
-<!-- 		</p> -->
-<!-- 		<p> -->
-<!-- 			<label> 주소 -->
-<!-- 				<input type = "text" name = "useraddress"/> -->
-<!-- 			</label> -->
-<!-- 		</p> -->
-<!-- 		<p> -->
-<!-- 			<label> 참고항목 -->
-<!-- 				<input type = "text" name = "userothers"/> -->
-<!-- 			</label> -->
-<!-- 		</p> -->
+		<p>
+			<label> 우편번호
+				<input type="text" id="sample6_postcode" name = "zipcode" placeholder="우편번호">
+				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+			</label>
+		</p>
+		<p>
+			<label> 주소
+				<input type="text" id="sample6_address" name = "addr" placeholder="주소"><br>
+				<input type="text" id="sample6_detailAddress" name = "addrdetail" placeholder="상세주소">
+			</label>
+		</p>
+		<p>
+			<label> 참고항목
+				<input type="text" id="sample6_extraAddress" name = "addretc" placeholder="참고항목">
+			</label>
+		</p>
 		
 		<input type = "button" value = "가입완료" onclick = "sendit()"/>
 	</form>
 </body>
 <script src = "user.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

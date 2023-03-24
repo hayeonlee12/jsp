@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <temp-directories>
   <temp-directory age="0" key="Tomcat v9.0 Server at localhost" path="tmp0" recycle="false"/>
+  <temp-directory age="0" key="day09" path="tmp6" recycle="false"/>
   <temp-directory age="0" key="day08" path="tmp5" recycle="false"/>
   <temp-directory age="0" key="day07" path="tmp4" recycle="false"/>
   <temp-directory age="0" key="day06" path="tmp3" recycle="false"/>
