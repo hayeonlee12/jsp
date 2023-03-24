@@ -58,3 +58,16 @@
 - 산술연산자 : +, - , *, /(div), %(mode)
 - 논리연산자 : &&(and), ||(or), !(not)
 - 비교연산자 : == , != , < , >, <=, >=
+- empty : 값이 null이거나 공백문자인지를 판단하는 연산자
+	$(empty ""}	-> true
+	${empty null}	-> true
+	${empty data}	-> 값이 없으면 true, 값이 있으면 data
+
+2-5. 예
+- request.setAttribute("cnt", 30);
+	->request.getAttribute("cnt");
+	-> ${cnt}
+- List list = new ArrayList<>{"1", "test" ...};
+	request.setAttribute("list", list);
+		-> ((List)request.getAttribute("list")).get(0)
+		-> ${list[0]}
