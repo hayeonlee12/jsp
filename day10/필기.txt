@@ -1,0 +1,33 @@
+
+1. el
+
+1-1. el의 데이터 저장소
+- 각 객체에 동일한 변수가 있을시 EL로 출력하면 아래 순서대로 
+출력된다.
+page > request > session > application
+
+- page scope : 하나의 JSP페이지에서만 사용
+- request scope : 하나의 요청 (request)에서만 사용할 수 있는 영역
+- session scope : 하나의 웹 브라우저에서 사용할 수 있는 영역
+- application scope : 웹 어플리케이션 영역
+
+2. jstl
+- JSP Standard Tab Library
+- 연산이나 조건문, 반복문을 편하게 처리할 수 있으며, JSP 페이지 내에서
+자바코드를 사용하지 않고도 로직을 구현할 수 있도록 효율적인 방법을
+제공한다.
+
+2-1. jstl core 태그
+- <c:set />
+	: 변수를 만들 때 사용
+- <c:out> </c:out>
+	:  값을 출력(EL문을 좀 더 많이 쓴다.)
+- <c:choose></c:choose>
+	: 조건 제어(switch)
+	내부에 c:when. c:otherwise 만 있어야 한다.
+- <c:when> </c:when>
+	: 조건 제어(case 문)
+- <c:otherwise> </c:otherwise>
+	: 조건 제어(default)
+- <c:forEach></c:forEach>
+	: 반복 제어(for문)
