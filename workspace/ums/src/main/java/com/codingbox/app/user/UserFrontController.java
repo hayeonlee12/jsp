@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.codingbox.action.ActionForward;
 
-@WebServlet()
+@WebServlet("*.us")
 public class UserFrontController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
@@ -25,26 +25,30 @@ public class UserFrontController extends HttpServlet {
 		doProcess(req, resp);
 	}
 	
-	protected void doProcess(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		String requestURI = req.getRequestURI();
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException, ServletException {
+		String requestURI = request.getRequestURI();
 		ActionForward forward = null;
 		if(requestURI.equals("/user/UserJoin.us")) {
 			System.out.println(requestURI + " 도착!!");
-			forward = new UserJoinAction().execute(req, resp);
+			forward = new UserJoinAction().execute(request, response);
 		} else if(requestURI.equals("/user/UserLogin.us")) {
 			forward = new ActionForward(false, "/app/user/loginview.jsp");
+		} else if(requestURI.equals("/user/UserLoginOk.us")) {
+			System.out.println("프론트 컨트롤러 도착!");
+			forward = new UserLoginOkAction().execute(request, response);
 		}
 		
 		// 전송에 대한 일괄처리
 		if(forward != null) {
 			if(forward.isRedirect()) { 
 				// true : redirect
-				resp.sendRedirect(forward.getPath());
+				response.sendRedirect(forward.getPath());
 			} else {
 				// false : forward
 				RequestDispatcher disp = 
-						req.getRequestDispatcher(forward.getPath());
-				disp.forward(req, resp);
+						request.getRequestDispatcher(forward.getPath());
+				disp.forward(request, response);
 			}
 		}
 	}

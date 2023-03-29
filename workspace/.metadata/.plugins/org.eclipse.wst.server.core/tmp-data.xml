@@ -9,5 +9,6 @@
   <temp-directory age="0" key="day07" path="tmp4" recycle="false"/>
   <temp-directory age="0" key="day06" path="tmp3" recycle="false"/>
   <temp-directory age="0" key="day05" path="tmp2" recycle="false"/>
+  <temp-directory age="0" key="board" path="tmp10" recycle="false"/>
   <temp-directory age="0" key="day04" path="tmp1" recycle="false"/>
 </temp-directories>

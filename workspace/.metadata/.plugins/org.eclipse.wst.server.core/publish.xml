@@ -9,5 +9,6 @@
   <server id="day07" path="publish4.dat"/>
   <server id="day06" path="publish3.dat"/>
   <server id="day05" path="publish2.dat"/>
+  <server id="board" path="publish10.dat"/>
   <server id="day04" path="publish1.dat"/>
 </publish-info>

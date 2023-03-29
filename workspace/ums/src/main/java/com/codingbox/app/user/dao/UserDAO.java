@@ -1,5 +1,7 @@
 package com.codingbox.app.user.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -22,4 +24,21 @@ public class UserDAO {
 		
 		return result;
 	}
+
+	public boolean login(String userid, String userpw) {
+		boolean result = false;
+		
+		HashMap<String, String> data = new HashMap<>();
+		data.put("userid", userid);
+		data.put("userpw", userpw);
+		
+		if((Integer)sqlsession.selectOne("User.login", data) == 1) {
+			result = true;
+		}
+		
+		
+		return result;
+	}
+
+
 }
